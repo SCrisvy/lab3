@@ -136,10 +136,10 @@
 			<a href="http://apcwebprog.csf.ph/~sgricafort/lab3/ci4/public/news" >News</a>
 			<br>
 			<br>
-			<a href="http://apcwebprog.csf.ph/~sgricafort/lab3/ci4/public/guest" >Guest form</a>
+			<a href="http://apcwebprog.csf.ph/~sgricafort/lab3/ci4/public/guest/create" >Guest form</a>
 			<br>
 			<br>
-			<a href="http://apcwebprog.csf.ph/~sgricafort/lab3/ci4/public/guest/create" >List of Guests</a>
+			<a href="http://apcwebprog.csf.ph/~sgricafort/lab3/ci4/public/guest" >List of Guests</a>
             <article>
         </section>
 		

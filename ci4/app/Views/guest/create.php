@@ -11,7 +11,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO MyGuests (name, email, website, comment, gender)
+$sql = "INSERT INTO sgricafort_myguests (name, email, website, comment, gender)
 VALUES ('Shane Ricafort', 'sgricafort@student.apc.edu.ph', 'http://apcwebprog.csf.ph/~sgricafort/lab3/ci4/public/index', 'mmmmmmmmmmmmmm', 'Female')";
 
 if ($conn->query($sql) === TRUE) {

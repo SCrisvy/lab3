@@ -1,82 +1,37 @@
+<header>
+<h2><?= esc($title) ?></h2>
 
+<?php echo link_tag('css/main.css'); ?>
 
- <?php
-				// define variables and set to empty values
-				$nameErr = $emailErr = $genderErr = $websiteErr = "";
-				$name = $email = $gender = $comment = $website = "";
+<?= session()->getFlashdata('error') ?>
+<?= validation_list_errors() ?>
+	
+<form action="<?= base_url() . "/guest/create" ?>" method="post">
+    <?= csrf_field() ?>
 
-				if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				  if (empty($_POST["name"])) {
-					$nameErr = "Name is required";
-				  } else {
-					$name = test_input($_POST["name"]);
-					// check if name only contains letters and whitespace
-					if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-					  $nameErr = "Only letters and white space allowed";
-					}
-				  }
-				  
-				  if (empty($_POST["email"])) {
-					$emailErr = "Email is required";
-				  } else {
-					$email = test_input($_POST["email"]);
-					// check if e-mail address is well-formed
-					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-					  $emailErr = "Invalid email format";
-					}
-				  }
-					
-				  if (empty($_POST["website"])) {
-					$website = "";
-				  } else {
-					$website = test_input($_POST["website"]);
-					// check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-					if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
-					  $websiteErr = "Invalid URL";
-					}
-				  }
+    <label for="name">Name</label>
+    <input type="input" name="name" value="<?= set_value('name') ?>">
+    <br>
 
-				  if (empty($_POST["comment"])) {
-					$comment = "";
-				  } else {
-					$comment = test_input($_POST["comment"]);
-				  }
+    <label for="email">Email</label>
+    <input type="input" name="email" value="<?= set_value('email') ?>">
+    <br>
 
-				  if (empty($_POST["gender"])) {
-					$genderErr = "Gender is required";
-				  } else {
-					$gender = test_input($_POST["gender"]);
-				  }
-				}
+    <label for="website">Website</label>
+    <input type="input" name="website" value="<?= set_value('website') ?>">
+    <br>
 
-				function test_input($data) {
-				  $data = trim($data);
-				  $data = stripslashes($data);
-				  $data = htmlspecialchars($data);
-				  return $data;
-				}
-				?>
+    <label for="comment">Comment</label>
+    <textarea name="comment" cols="45" rows="4"><?= set_value('comment') ?></textarea>
+    <br>
 
-				<h2>PHP Form Validation Example</h2>
-				<p><span class="error">* required field</span></p>
-				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-				  Name: <input type="text" name="name" value="<?php echo $name;?>">
-				  <span class="error">* <?php echo $nameErr;?></span>
-				  <br>
-				  E-mail: <input type="text" name="email" value="<?php echo $email;?>">
-				  <span class="error">* <?php echo $emailErr;?></span>
-				  <br>
-				  Website: <input type="text" name="website" value="<?php echo $website;?>">
-				  <span class="error"><?php echo $websiteErr;?></span>
-				  <br>
-				  Comment: <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
-				  <br>
-				  Gender:<input type="text" name="gender" value="<?php echo $gender;?>">
-				  <span class="error">* <?php echo $genderErr;?></span>
-				  <br>
-				  <input type="submit" name="submit" value="Submit">  
-				</form>
+    <label for="gender">Gender</label>
+    <input type="input" name="gender" value="<?= set_value('gender') ?>">
+    <br>
 
+    <input type="submit" name="submit" value="Create guest entry">
+</form>
+</header>
 				
 				<?php
 				
@@ -90,7 +45,7 @@
 				}
 
 				$sql = "INSERT INTO sgricafort_myguests (name, email, website, comment, gender)
-				VALUES ('$name', '$email', '$website', '$comment', '$gender')";
+				VALUES ('name', 'email', 'website', 'comment', 'gender')";
 
 				if ($mysqli->query($sql) === TRUE) {
 				  echo "New record created successfully";

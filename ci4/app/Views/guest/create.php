@@ -1,34 +1,33 @@
-<header>
-<h2><?= esc($title) ?></h2>
+<?php
+$servername = "192.168.150.213";
+$username = "webprogss211";
+$password = "fancyR!ce36";
+$dbname = "webprogss211";
 
-<?php echo link_tag('css/main.css'); ?>
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
-<?= session()->getFlashdata('error') ?>
-<?= validation_list_errors() ?>
+// sql to create table
+$sql = "CREATE TABLE MyGuests (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30) NOT NULL,
+email VARCHAR(50),
+website VARCHAR(30) NOT NULL,
+comment TEXT(150) NOT NULL,
+gender VARCHAR(10)
+reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)";
 
-<form action="<?= base_url() . "/guest/create/" ?>" method="post">
-    <?= csrf_field() ?>
+if ($conn->query($sql) === TRUE) {
+  echo "Table MyGuests created successfully";
+} else {
+  echo "Error creating table: " . $conn->error;
+}
 
-    <label for="name">Name</label>
-    <input type="input" name="name" value="<?= set_value('name') ?>">
-    <br>
-
-    <label for="email">Email</label>
-    <input type="input" name="email" value="<?= set_value('email') ?>">
-    <br>
-
-    <label for="website">Website</label>
-    <input type="input" name="website" value="<?= set_value('website') ?>">
-    <br>
-
-    <label for="comment">Comment</label>
-    <textarea name="comment" cols="45" rows="4"><?= set_value('comment') ?></textarea>
-    <br>
-
-    <label for="gender">Gender</label>
-    <input type="input" name="gender" value="<?= set_value('gender') ?>">
-    <br>
-
-    <input type="submit" name="submit" value="Create guest entry">
-</form>
-</header>
+$conn->close();
+?>
+   

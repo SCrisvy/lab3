@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 $sql = "INSERT INTO sgricafort_myguests (name, email, website, comment, gender)
-VALUES ('Shane Ricafort', 'sgricafort@student.apc.edu.ph', 'http://apcwebprog.csf.ph/~sgricafort/lab3/ci4/public/index', 'mmmmmmmmmmmmmm', 'Female')";
+VALUES ('Shane Ricafort', 'sgricafort@student.apc.edu.ph', 'http://apcwebprog.csf.ph/~sgricafort/lab3/ci4/public/index', 'mmmmmmmm', 'Female')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
